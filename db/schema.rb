@@ -19,8 +19,8 @@ ActiveRecord::Schema.define(version: 20160827170330) do
   create_table "users", force: :cascade do |t|
     t.string    "username"
     t.string    "name"
-    t.string    "uniquedevice_token"
-    t.geography "location",           limit: {:srid=>4326, :type=>"point", :geographic=>true}, null: false
+    t.string    "unique_device_token"
+    t.geography "location",            limit: {:srid=>4326, :type=>"point", :geographic=>true}, null: false
     t.index ["location"], name: "index_users_on_location", using: :gist
   end
 
