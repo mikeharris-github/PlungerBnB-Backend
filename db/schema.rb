@@ -10,17 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160827170330) do
+ActiveRecord::Schema.define(version: 20160827214725) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
 
+  create_table "deliveries", force: :cascade do |t|
+    t.integer "requestor_id"
+    t.integer "deliverer_id"
+    t.boolean "delivered"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string    "username"
     t.string    "name"
     t.string    "unique_device_token"
-    t.geography "location",            limit: {:srid=>4326, :type=>"point", :geographic=>true}, null: false
+    t.geography "location",            limit: {:srid=>4326, :type=>"point", :geographic=>true},                 null: false
+    t.boolean   "requesting_plunger",                                                           default: false
     t.index ["location"], name: "index_users_on_location", using: :gist
   end
 
